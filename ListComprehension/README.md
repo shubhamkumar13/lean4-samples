@@ -69,7 +69,7 @@ syntax "[" term " | " compClause,* "]" : term
 
 macro_rules
   | `([$t:term |]) => `([$t])
-  | `([$t:term | for $x in $xs]) => `(List.map $xs  (λ $x => $t))
+  | `([$t:term | for $x in $xs]) => `(List.map (λ $x => $t) $xs)
   | `([$t:term | if $x]) => `(if $x then [$t] else [])
   | `([$t:term | $c, $cs,*]) => `(List.join [[$t | $cs,*] | $c])
 
